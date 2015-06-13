@@ -1,5 +1,5 @@
 {
-  "name": "QueryStringJS",
+  "name": "querystringjs",
   "version": "0.0.0-alpha",
   "description": "A query string parsing utility",
   "main": "src/querystring.js",

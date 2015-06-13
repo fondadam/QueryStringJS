@@ -46,7 +46,90 @@
     };
     QueryString.prototype = {
         parse: function (str) {
+            var obj,
+                pairs,
+                pair,
+                eqIndex,
+                rawKey,
+                rawValue,
+                key,
+                value,
+                i;
 
+            if (str === null ||
+                str === undefined) {
+                return null;
+            }
+
+            //cast to string
+            str += '';
+
+            obj = {};
+
+            if (!str.length) {
+                return obj;
+            }
+
+            //check if the string starts with ?,
+            //remove the first ? if it does
+            if (~this.options.ignoreFirst.indexOf(str.charAt(0))) {
+                str = str.slice(1);
+            }
+
+            pairs =
+                this.options.semicolons
+                    ? str.split(/[&;]/g)
+                    : str.split(/&/g);
+
+            for (i = 0; i < pairs.length; i += 1) {
+                pair = pairs[i];
+                eqIndex = pair.indexOf('=');
+                if (eqIndex < 0) {
+                    rawKey = pair;
+                    rawValue = null;
+                } else {
+                    rawKey = pair.slice(0, eqIndex);
+                    rawValue = pair.slice(eqIndex + 1);
+                }
+                key = decodeURIComponent(rawKey);
+                value =
+                    rawValue === null
+                        ? null
+                        : decodeURIComponent(rawValue);
+                if (has(obj, key)) {
+                    obj[key].push(value);
+                } else {
+                    obj[key] = [value];
+                }
+            }
+
+            switch (this.options.flatten) {
+                case 'first':
+                    for (key in obj) {
+                        if (has(obj, key)) {
+                            obj[key] = obj[key].shift();
+                        }
+                    }
+                    break;
+                case 'last':
+                case true:
+                    for (key in obj) {
+                        if (has(obj, key)) {
+                            obj[key] = obj[key].pop();
+                        }
+                    }
+                    break;
+                case 'singles':
+                    for (key in obj) {
+                        if (has(obj, key) &&
+                            obj[key].length === 1) {
+                            obj[key] = obj[key].pop();
+                        }
+                    }
+                    break;
+            }
+
+            return obj;
         },
         stringify: function (obj) {
 

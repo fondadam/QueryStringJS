@@ -1,4 +1,4 @@
-# QueryStringJS
+# QueryStringJS [![NPM Version][npm-badge]][npm-link]
 
 A query string parsing utility that properly handles a [bunch of edge cases][1]. Use this when you want to handle query strings correctly.
 
@@ -134,3 +134,5 @@ The object to stringify into a query string.
 [2]: https://github.com/umdjs/umd
 [3]: https://github.com/zzzzBov/QueryStringJS/releases
 [4]: http://browserify.org/
+[npm-badge]: https://img.shields.io/npm/v/querystringjs.svg
+[npm-link]: https://www.npmjs.com/package/querystringjs

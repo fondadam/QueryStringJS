@@ -60,6 +60,9 @@ describe('QueryString', function () {
         it('should handle percent encoded keys', function () {
             assert.deepEqual(qs.parse('foo%26bar=baz'), {'foo&bar': 'baz'});
         });
+        it('should handle `+` as a space character', function () {
+            assert.deepEqual(qs.parse('foo=bar+baz'), {foo: 'bar baz'});
+        });
         it('should run the gauntlet', function () {
             assert.deepEqual(
                 qs.parse('?foo=bar&foo=baz;fizz&fizz=;fizz=buzz&fizz=buzz&fizz=buzz%26buzz&&=;==;?&%26;'),

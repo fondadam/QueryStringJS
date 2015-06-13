@@ -113,8 +113,11 @@ describe('QueryString', function () {
         it('should handle null values', function () {
             assert.strictEqual(qs.stringify({foo: null}), 'foo');
         });
+        it('should handle undefined values', function () {
+            assert.strictEqual(qs.stringify({foo: undefined}), 'foo');
+        });
         it('should handle empty keys', function () {
-            assert.strictEqual(qs.stringify({'': bar}), '=bar');
+            assert.strictEqual(qs.stringify({'': 'bar'}), '=bar');
         });
         it('should handle empty keys with empty values', function () {
             assert.strictEqual(qs.stringify({'': ''}), '=');

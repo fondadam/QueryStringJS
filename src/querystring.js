@@ -1,3 +1,11 @@
+/*!
+ * QueryStringJS
+ * v@version
+ * 
+ * https://github.com/zzzzBov/QueryStringJS
+ * Copyright (c) 2015 zzzzBov
+ * MIT License
+ */
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.

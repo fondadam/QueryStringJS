@@ -66,20 +66,25 @@ This can be inconvenient for access, so these inner arrays may be flattened in v
 Options include:
 
  * *`'first'`* - select the first values:
+
    ```
    {
        "foo": "bar",
        "fizz": "buzz"
    }
    ```
+
  * *`'last'`* - select the last values:
+
    ```
    {
        "foo": "baz",
        "fizz": "buzz"
    }
    ```
+
  * *`'singles'`* - flatten the array only if there's a single value:
+
    ```
    {
        "foo": [
@@ -89,9 +94,13 @@ Options include:
        "fizz": "buzz"
    }
    ```
+
  * *`'none'`* - don't flatten the array
+
  * *`true`* - same as `'last'`
+
  * *`false`* - same as `'none'`
+
  * *any other value* - same as `'none'`
 
 Defaults to `'singles'`

@@ -76,6 +76,8 @@
                 str = str.slice(1);
             }
 
+            str = str.replace(/\+/g, '%20');
+
             pairs =
                 this.options.semicolons
                     ? str.split(/[&;]/g)

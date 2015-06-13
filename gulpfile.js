@@ -8,5 +8,5 @@ gulp.task('default', function () {
         .pipe(rename({
             extname: '.min.js'
         }))
-        .pipe(gulp.dest('src/'));
+        .pipe(gulp.dest('dist/'));
 });

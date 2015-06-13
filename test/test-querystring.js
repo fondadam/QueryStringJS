@@ -28,6 +28,9 @@ describe('QueryString', function () {
         it('should handle multiple values with the same key', function () {
             assert.deepEqual(qs.parse('foo=bar&foo=baz'), {foo: ['bar', 'baz']});
         });
+        it('should handle duplicate key value pairs', function () {
+            assert.deepEqual(qs.parse('foo=bar&foo=bar'), {foo: ['bar', 'bar']});
+        });
         it('should ignore initial `?` characters', function () {
             assert.deepEqual(qs.parse('?foo=bar'), {foo: 'bar'});
             assert.deepEqual(qs.parse('??foo=bar'), {'?foo': 'bar'});
@@ -48,8 +51,25 @@ describe('QueryString', function () {
         it('should handle null', function () {
             assert.strictEqual(qs.parse(null), null);
         });
+        it('should handle percent encoded values', function () {
+            assert.strictEqual(qs.parse('foo=bar%26baz'), {foo: 'bar&baz'});
+        });
+        it('should handle percent encoded keys', function () {
+            assert.strictEqual(qs.parse('foo%26bar=baz'), {'foo&bar': 'baz'});
+        });
+        it('should run the gauntlet', function () {
+            assert.strictEqual(
+                qs.parse('?foo=bar&foo=baz;fizz&fizz=;fizz=buzz&fizz=buzz&fizz=buzz%26buzz&&=;==;?&%26;'),
+                {
+                    foo: ['bar', 'baz'],
+                    fizz: [null, '', 'buzz', 'buzz', 'buzz&buzz'],
+                    '': [null, '', '=', null],
+                    '?': null,
+                    '&': null
+                });
+        });
     });
     describe('.stringify()', function () {
-        
+
     });
 });

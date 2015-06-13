@@ -51,6 +51,9 @@ describe('QueryString', function () {
         it('should handle null', function () {
             assert.strictEqual(qs.parse(null), null);
         });
+        it('should handle undefined', function () {
+            assert.strictEqual(qs.parse(undefined), null);
+        });
         it('should handle percent encoded values', function () {
             assert.strictEqual(qs.parse('foo=bar%26baz'), {foo: 'bar&baz'});
         });
@@ -67,6 +70,14 @@ describe('QueryString', function () {
                     '?': null,
                     '&': null
                 });
+        });
+        it('should cast objects to strings', function () {
+            var obj = {
+                toString: function () {
+                    return 'foo=bar';
+                }
+            };
+            assert.strictEqual(qs.parse(obj), {foo: 'bar'});
         });
     });
     describe('.stringify()', function () {

@@ -55,13 +55,13 @@ describe('QueryString', function () {
             assert.strictEqual(qs.parse(undefined), null);
         });
         it('should handle percent encoded values', function () {
-            assert.strictEqual(qs.parse('foo=bar%26baz'), {foo: 'bar&baz'});
+            assert.deepEqual(qs.parse('foo=bar%26baz'), {foo: 'bar&baz'});
         });
         it('should handle percent encoded keys', function () {
-            assert.strictEqual(qs.parse('foo%26bar=baz'), {'foo&bar': 'baz'});
+            assert.deepEqual(qs.parse('foo%26bar=baz'), {'foo&bar': 'baz'});
         });
         it('should run the gauntlet', function () {
-            assert.strictEqual(
+            assert.deepEqual(
                 qs.parse('?foo=bar&foo=baz;fizz&fizz=;fizz=buzz&fizz=buzz&fizz=buzz%26buzz&&=;==;?&%26;'),
                 {
                     foo: ['bar', 'baz'],
@@ -77,7 +77,7 @@ describe('QueryString', function () {
                     return 'foo=bar';
                 }
             };
-            assert.strictEqual(qs.parse(obj), {foo: 'bar'});
+            assert.deepEqual(qs.parse(obj), {foo: 'bar'});
         });
     });
     describe('.stringify()', function () {

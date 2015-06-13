@@ -1,0 +1,19 @@
+{
+    "name": "QueryStringJS",
+    "version": "0.0.0-alpha",
+    "description": "A query string parsing utility",
+    "main": "src/querystring.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zzzzBov/QueryStringJS.git"
+    },
+    "author": "zzzzBov <zzzzbov@gmail.com> (http://zzzzbov.com/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/zzzzBov/QueryStringJS/issues"
+    },
+    "homepage": "https://github.com/zzzzBov/QueryStringJS",
+    "devDependencies": {
+        
+    }
+}

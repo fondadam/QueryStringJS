@@ -83,7 +83,43 @@ describe('QueryString', function () {
             assert.deepEqual(qs.parse(obj), {foo: 'bar'});
         });
     });
-    describe('.stringify()', function () {
 
+    describe('.stringify()', function () {
+        it('should stringify `null` to `null`', function () {
+            assert.strictEqual(qs.stringify(null), null);
+        });
+        it('should stringify `undefined` to `null`', function () {
+            assert.strictEqual(qs.stringify(undefined), null);
+        });
+        it('should stringify an empty object to an empty string', function () {
+            assert.strictEqual(qs.stringify({}), '');
+        });
+        it('should handle key value pairs', function () {
+            assert.strictEqual(qs.stringify({foo: 'bar'}), 'foo=bar');
+        });
+        it('should encode values', function () {
+            assert.strictEqual(qs.stringify({foo: 'bar&baz'}), 'foo=bar%26baz');
+        });
+        it('should encode keys', function () {
+            assert.strictEqual(qs.stringify({'foo&bar': 'baz'}), 'foo%26bar=baz');
+        });
+        it('should handle keys with arrays', function () {
+            assert.strictEqual(qs.stringify({foo: ['bar', 'baz']}), 'foo=bar&foo=baz');
+        });
+        it('should handle empty values', function () {
+            assert.strictEqual(qs.stringify({foo: ''}), 'foo=');
+        });
+        it('should handle null values', function () {
+            assert.strictEqual(qs.stringify({foo: null}), 'foo');
+        });
+        it('should handle empty keys', function () {
+            assert.strictEqual(qs.stringify({'': bar}), '=bar');
+        });
+        it('should handle empty keys with empty values', function () {
+            assert.strictEqual(qs.stringify({'': ''}), '=');
+        });
+        it('should handle empty keys with null values', function () {
+            assert.strictEqual(qs.stringify({'': null}), '');
+        });
     });
 });

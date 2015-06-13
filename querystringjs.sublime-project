@@ -3,6 +3,10 @@
         "name": "Mocha",
         "shell_cmd": "mocha",
         "working_dir": "$project_path"
+    }, {
+        "name": "Gulp",
+        "shell_cmd": "gulp",
+        "working_dir": "$project_path"
     }],
 	"folders": [{
 		"path": "."

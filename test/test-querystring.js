@@ -104,6 +104,7 @@ describe('QueryString', function () {
             assert.strictEqual(qs.stringify({'foo&bar': 'baz'}), 'foo%26bar=baz');
         });
         it('should handle keys with arrays', function () {
+            assert.strictEqual(qs.stringify({foo: ['bar']}), 'foo=bar');
             assert.strictEqual(qs.stringify({foo: ['bar', 'baz']}), 'foo=bar&foo=baz');
         });
         it('should handle empty values', function () {
@@ -120,6 +121,31 @@ describe('QueryString', function () {
         });
         it('should handle empty keys with null values', function () {
             assert.strictEqual(qs.stringify({'': null}), '');
+            assert.strictEqual(qs.stringify({foo: 'bar', '': null}), 'foo=bar&');
+        });
+        it('should attempt to convert nested objects to strings', function () {
+            assert.strictEqual(qs.stringify(
+                {
+                    foo: {
+                        toString: function () {
+                            return 'bar'
+                        }
+                    }
+                }),
+                'foo=bar');
+            assert.strictEqual(qs.stringify(
+                {
+                    foo: [{
+                        toString: function () {
+                            return 'bar'
+                        }
+                    }, {
+                        toString: function () {
+                            return 'baz'
+                        }
+                    }]
+                }),
+                'foo=bar&foo=baz');
         });
     });
 });

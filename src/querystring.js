@@ -134,7 +134,41 @@
             return obj;
         },
         stringify: function (obj) {
+            var pairs;
 
+            if (obj === null ||
+                obj === undefined) {
+                return null;
+            }
+
+            pairs = [];
+
+            Object.keys(obj).forEach(function (rawKey) {
+                var key,
+                    rawValue;
+
+                function getValue(rawValue) {
+                    var value;
+                    if (rawValue === null ||
+                        rawValue === undefined) {
+                        return [key];
+                    }
+                    value = encodeURIComponent(rawValue);
+                    return [key, value];
+                }
+
+                key = encodeURIComponent(rawKey);
+                rawValue = obj[rawKey];
+                if (Array.isArray(rawValue)) {
+                    pairs.push.apply(pairs, rawValue.map(getValue));
+                } else {
+                    pairs.push(getValue(rawValue));
+                }
+            });
+
+            return pairs.map(function (arr) {
+                return arr.join('=');
+            }).join('&');
         }
     };
 
